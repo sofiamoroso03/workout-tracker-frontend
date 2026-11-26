@@ -19,6 +19,12 @@ export async function apiRequest(endpoint, options = {}) {
 
     const data = await response.json().catch(() => ({}));
 
+    if (response.status === 401 && token) {
+        localStorage.removeItem("auth_token");
+        window.location.href = "/login";
+        throw new Error("Tu sesión expiró. Iniciá sesión nuevamente.");
+    }
+
     if (!response.ok) {
         const message =
             data?.message ||

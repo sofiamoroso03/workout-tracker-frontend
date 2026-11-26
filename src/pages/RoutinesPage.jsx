@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
     createRoutineRequest,
     deleteRoutineRequest,
@@ -258,6 +259,12 @@ export default function RoutinesPage() {
                                 </div>
 
                                 <div className="card-actions">
+                                    <Link
+                                        to={`/routines/${routine._id}`}
+                                        className="btn btn-outline btn-sm"
+                                    >
+                                        Ver detalle
+                                    </Link>
                                     <button
                                         type="button"
                                         className="btn btn-outline btn-sm"

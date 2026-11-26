@@ -23,3 +23,7 @@ export function deleteRoutineRequest(id) {
         method: "DELETE",
     });
 }
+
+export function getRoutineByIdRequest(id) {
+    return apiRequest(`/api/routines/${id}`);
+}

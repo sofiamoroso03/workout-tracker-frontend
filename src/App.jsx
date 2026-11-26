@@ -4,7 +4,9 @@ import { ProtectedRoute, PublicRoute } from "./components/ProtectedRoute.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
+import RoutineDetailPage from "./pages/RoutineDetailPage.jsx";
 import RoutinesPage from "./pages/RoutinesPage.jsx";
+import SessionDetailPage from "./pages/SessionDetailPage.jsx";
 import SessionsPage from "./pages/SessionsPage.jsx";
 
 function PrivateLayout() {
@@ -31,7 +33,9 @@ export default function App() {
                     <Route element={<ProtectedRoute />}>
                         <Route element={<PrivateLayout />}>
                             <Route path="/sessions" element={<SessionsPage />} />
+                            <Route path="/sessions/:id" element={<SessionDetailPage />} />
                             <Route path="/routines" element={<RoutinesPage />} />
+                            <Route path="/routines/:id" element={<RoutineDetailPage />} />
                         </Route>
                     </Route>
 

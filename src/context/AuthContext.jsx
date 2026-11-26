@@ -14,11 +14,31 @@ function decodeTokenPayload(token) {
     }
 }
 
+function isTokenValid(token) {
+    if (!token) return false;
+    const payload = decodeTokenPayload(token);
+    if (!payload) return false;
+    if (payload.exp && payload.exp * 1000 < Date.now()) {
+        return false;
+    }
+    return true;
+}
+
 export function AuthProvider({ children }) {
-    const [token, setToken] = useState(() => localStorage.getItem("auth_token"));
+    const [token, setToken] = useState(() => {
+        const savedToken = localStorage.getItem("auth_token");
+        if (savedToken && isTokenValid(savedToken)) {
+            return savedToken;
+        }
+        localStorage.removeItem("auth_token");
+        return null;
+    });
+
     const [user, setUser] = useState(() => {
         const savedToken = localStorage.getItem("auth_token");
-        return savedToken ? decodeTokenPayload(savedToken) : null;
+        return savedToken && isTokenValid(savedToken)
+            ? decodeTokenPayload(savedToken)
+            : null;
     });
 
     function login(newToken, userData = null) {

@@ -24,3 +24,7 @@ export function deleteSessionRequest(id) {
         method: "DELETE",
     });
 }
+
+export function getSessionByIdRequest(id) {
+    return apiRequest(`/api/sessions/${id}`);
+}
